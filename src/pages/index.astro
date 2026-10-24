@@ -1,0 +1,304 @@
+---
+const title = 'Chen Yuxiang';
+const description = '我在做的东西，和这个网站为什么存在。';
+
+const projects = [
+  {
+    name: 'Takeweave',
+    href: '/takeweave',
+    desc: '完全离线运行在 Apple Silicon Mac 上的生成式人声修复。试听室里有真实的处理前后对比，也能用你自己的录音测一测。',
+    meta: '试听室 →',
+  },
+  {
+    name: 'Niigata data viz',
+    href: 'https://github.com/gitcyx93/niigata-data-viz',
+    desc: '用公开统计数据给新潟画图：大米、清酒、石油、观光、人口。',
+    meta: 'GitHub →',
+  },
+];
+
+const links = [
+  { label: 'Email', value: 'chen@yuxiangchen.dev', href: 'mailto:chen@yuxiangchen.dev' },
+  { label: 'GitHub', value: 'gitcyx93', href: 'https://github.com/gitcyx93' },
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL('/', Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+
+  <body>
+    <main class="page">
+      <header class="intro">
+        <p class="eyebrow">yuxiangchen.dev</p>
+        <h1>Chen Yuxiang</h1>
+        <p class="lede">
+          住在日本新潟。做软件、做声音，也写点东西。这里是我自己的地方：没有登录，没有广告，没有算法推荐。
+        </p>
+      </header>
+
+      <section>
+        <h2 class="label">在做的事</h2>
+        <ul class="list">
+          {
+            projects.map((p) => (
+              <li>
+                <a class="row" href={p.href}>
+                  <span class="row-name">{p.name}</span>
+                  <span class="row-desc">{p.desc}</span>
+                  <span class="row-meta">{p.meta}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="label">为什么有这个网站</h2>
+        <div class="prose">
+          <p>
+            我受够了听歌软件要手机号，两分钟的视频配五十秒广告，标题说的事一个字没提、只会让你一键三连的“创作者”。也受够了做内容时有一万个话题不能碰，花了时间做的东西随时可能被下架。
+          </p>
+          <p>
+            但这些东西没有一样是必须的。CSS、Email、GitHub，整个开放互联网的基础设施一直都在，只是平台花了十年让人忘了这件事。现在有了 AI，自建网站的门槛也没了。
+          </p>
+          <blockquote>
+            我们创造内容，是因为内容本身值得存在。<br />
+            不要做平台的产品。成为你自己的目的。
+          </blockquote>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="label">联系</h2>
+        <dl class="links">
+          {
+            links.map((l) => (
+              <div>
+                <dt>{l.label}</dt>
+                <dd>
+                  <a href={l.href}>{l.value}</a>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="note">不用注册，不用关注，直接写信就行。</p>
+      </section>
+
+      <footer class="foot">© {new Date().getFullYear()} Chen Yuxiang</footer>
+    </main>
+
+    <style is:global>
+      /* 和 Takeweave 试听页共用一套色板：暖纸、石墨、铜色 */
+      :root {
+        --paper: #f7f6f3;
+        --ink: #23262a;
+        --ink-soft: #6b6963;
+        --ink-faint: #b6b3ac;
+        --line: rgba(35, 38, 42, 0.14);
+        --line-soft: rgba(35, 38, 42, 0.07);
+        --copper: #a34a29;
+        --copper-wash: rgba(163, 74, 41, 0.08);
+
+        --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue',
+          'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        --mono: ui-monospace, 'SF Mono', Menlo, 'JetBrains Mono', monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #1a1b1d;
+          --ink: #ecebe7;
+          --ink-soft: #94918a;
+          --ink-faint: #55575a;
+          --line: rgba(236, 235, 231, 0.15);
+          --line-soft: rgba(236, 235, 231, 0.07);
+          --copper: #e38f5c;
+          --copper-wash: rgba(227, 143, 92, 0.12);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      ::selection {
+        background: var(--copper-wash);
+      }
+
+      .page {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: clamp(3.5rem, 14vh, 8rem) 1.25rem 2rem;
+      }
+
+      .eyebrow,
+      .label {
+        margin: 0 0 0.9rem;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      h1 {
+        margin: 0 0 1.1rem;
+        font-size: clamp(2rem, 6vw, 2.8rem);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.024em;
+      }
+
+      .lede {
+        margin: 0;
+        max-width: 36rem;
+        color: var(--ink-soft);
+      }
+
+      section {
+        margin-top: clamp(3rem, 9vh, 4.5rem);
+      }
+
+      /* 项目列表：扁平分隔线，悬停时铜色只标记动作 */
+      .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--ink);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+        gap: 0.4rem 1.25rem;
+        align-items: baseline;
+        padding: 0.95rem 0;
+        border-bottom: 1px solid var(--line-soft);
+        text-decoration: none;
+        transition: padding-left 0.22s var(--ease);
+      }
+
+      .row:hover {
+        padding-left: 0.35rem;
+      }
+
+      .row-name {
+        font-weight: 600;
+      }
+
+      .row-desc {
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+      }
+
+      .row-meta {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+        white-space: nowrap;
+        transition: color 0.18s var(--ease);
+      }
+
+      .row:hover .row-meta,
+      .row:hover .row-name {
+        color: var(--copper);
+      }
+
+      @media (max-width: 600px) {
+        .row {
+          grid-template-columns: 1fr auto;
+        }
+        .row-desc {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+      }
+
+      .prose p {
+        margin: 0 0 1rem;
+        color: var(--ink-soft);
+      }
+
+      blockquote {
+        margin: 1.5rem 0 0;
+        padding-left: 1rem;
+        border-left: 2px solid var(--copper);
+        color: var(--ink);
+      }
+
+      .links {
+        margin: 0;
+        border-top: 1px solid var(--ink);
+      }
+
+      .links > div {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.65rem 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .links dt {
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+      }
+
+      .links dd {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 0.85rem;
+      }
+
+      .links a {
+        text-decoration: none;
+      }
+
+      .links a:hover {
+        color: var(--copper);
+      }
+
+      .note {
+        margin: 0.9rem 0 0;
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+      }
+
+      .foot {
+        margin-top: clamp(4rem, 12vh, 6rem);
+        padding-top: 1.1rem;
+        border-top: 1px solid var(--line-soft);
+        font-size: 0.72rem;
+        color: var(--ink-faint);
+      }
+    </style>
+  </body>
+</html>
