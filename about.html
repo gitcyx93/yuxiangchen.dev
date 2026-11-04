@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chen Yuxiang</title>
+  <meta name="description" content="Chen Yuxiang 的个人主页。">
+  <style>
+    /* 配色：暖纸底、石墨字、铜色链接。想换颜色只改这几行。 */
+    :root {
+      --paper: #f7f6f3;
+      --ink: #23262a;
+      --soft: #6b6963;
+      --line: rgba(35, 38, 42, 0.12);
+      --accent: #a34a29;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #1a1b1d;
+        --ink: #ecebe7;
+        --soft: #94918a;
+        --line: rgba(236, 235, 231, 0.14);
+        --accent: #e38f5c;
+      }
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    main {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: 5rem 1.25rem 3rem;
+    }
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      margin: 3rem 0 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--soft);
+    }
+    p { margin: 0 0 1rem; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    ul { margin: 0; padding-left: 1.2rem; }
+    li { margin-bottom: 0.4rem; }
+    footer {
+      margin-top: 4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <h1>Chen Yuxiang</h1>
+
+  <!-- 自我介绍：直接改下面几段文字。想加一段就复制一行 <p>…</p>。 -->
+  <p>你好，我是 Chen Yuxiang。</p>
+  <p>我平时做一些自己想用的东西：一个完全离线运行的人声修复工具，还有用网页代码画的新潟四季小动画。</p>
+  <p>这个网站是我自己的地方。没有登录，没有广告，没有算法推荐，也不会被下架。我想写什么就写什么，你想看就来看。</p>
+
+  <h2>在做的事</h2>
+  <!-- 每一行一个项目。改链接就改 href="…" 里的地址；没有链接的项目把 <a> 去掉只留文字。 -->
+  <ul>
+    <li><a href="https://yuxiangchen.dev/takeweave">Takeweave</a>：离线运行在 Mac 上的人声修复，可以试听处理前后的对比。</li>
+    <li><a href="https://github.com/gitcyx93/niigata-mini-animations">新潟四季小动画</a>：高田夜樱、长冈花火、弥彦、越后汤泽。</li>
+    <li>新潟 3D 冒险地图：制作中。</li>
+  </ul>
+
+  <h2>联系</h2>
+  <p>
+    邮件：<a href="mailto:chen@yuxiangchen.dev">chen@yuxiangchen.dev</a><br>
+    GitHub：<a href="https://github.com/gitcyx93">gitcyx93</a>
+  </p>
+
+  <footer>© 2026 Chen Yuxiang</footer>
+
+</main>
+</body>
+</html>
