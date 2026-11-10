@@ -91,9 +91,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <h2 class="label">{t.labels.why}</h2>
         <div class="prose">
           {t.why.paragraphs.map((p) => <p>{p}</p>)}
-          <blockquote>
-            {t.why.quote.map((line) => <span>{line}</span>)}
-          </blockquote>
+          {t.why.quote.length > 0 && (
+            <blockquote>
+              {t.why.quote.map((line) => <span>{line}</span>)}
+            </blockquote>
+          )}
         </div>
       </section>
 
