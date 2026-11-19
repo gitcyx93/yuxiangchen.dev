@@ -1,0 +1,456 @@
+/* 颜色：纸、墨、叶、花。想换颜色只改这两段。 */
+:root {
+  --paper: #f6f4ee;
+  --ink: #22241f;
+  --soft: #696a61;
+  --faint: #b3b2a7;
+  --line: rgba(34, 36, 31, 0.14);
+  --leaf: #6f8f58;
+  --leaf-deep: #4f6b3d;
+  --bloom: #b5532c;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Songti SC', 'Noto Serif CJK SC', serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #171916;
+    --ink: #e9e8e1;
+    --soft: #9a9b90;
+    --faint: #5a5c54;
+    --line: rgba(233, 232, 225, 0.16);
+    --leaf: #7f9e69;
+    --leaf-deep: #a9c493;
+    --bloom: #e39160;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 8vh, 4.5rem) 1.25rem 2.5rem;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bloom);
+  outline-offset: 3px;
+}
+
+/* 顶部一行和各节的小标题用同一种小字 */
+.top,
+h2 {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(2.5rem, 9vh, 5rem);
+}
+
+.top a {
+  text-decoration: none;
+}
+
+.top a:hover {
+  color: var(--bloom);
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--soft);
+}
+
+section {
+  margin-top: clamp(3rem, 9vh, 4.5rem);
+}
+
+h2 {
+  margin: 0 0 0.9rem;
+}
+
+.quiet {
+  margin: 0.8rem 0 0;
+  max-width: 36rem;
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+
+/* ---------- 花园 ---------- */
+.garden {
+  margin-top: clamp(2rem, 6vh, 3rem);
+}
+
+.rows {
+  touch-action: pan-y;
+}
+
+/* 屏幕够宽时，花园比文字栏两边各多出一点 */
+@media (min-width: 52rem) {
+  .rows {
+    margin: 0 -2rem;
+  }
+}
+
+.row {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.row * {
+  vector-effect: non-scaling-stroke;
+}
+
+.ground,
+.grass {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.grass {
+  stroke: var(--leaf-deep);
+  opacity: 0.7;
+}
+
+.stem,
+.wood {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+
+.leaf {
+  fill: var(--leaf);
+  stroke: var(--ink);
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+}
+
+.crown {
+  fill: var(--leaf);
+  opacity: 0.82;
+}
+
+.mound {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.petal {
+  fill: var(--bloom);
+}
+
+.eye {
+  fill: var(--paper);
+}
+
+.stake path,
+.stake rect {
+  fill: none;
+  stroke: var(--faint);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.plot:hover .stake path,
+.plot:hover .stake rect {
+  stroke: var(--soft);
+}
+
+/* 看不见的点击区域，比植物本身大，好点 */
+.hit {
+  fill: transparent;
+  stroke: none;
+}
+
+.plant {
+  cursor: pointer;
+  outline: none;
+}
+
+.plant .leaf,
+.plant .crown {
+  transition: fill 0.2s;
+}
+
+.plant:hover .leaf,
+.plant:hover .crown,
+.plant:focus-visible .leaf,
+.plant:focus-visible .crown,
+.plant.lit .leaf,
+.plant.lit .crown {
+  fill: var(--leaf-deep);
+}
+
+.plant:focus-visible .hit {
+  stroke: var(--bloom);
+  stroke-width: 2;
+}
+
+/* 打开页面时从地里长出来，然后一直轻轻摇 */
+.grow {
+  animation: grow 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+  animation-delay: calc(var(--i) * 70ms + 150ms);
+}
+
+.sway {
+  animation: sway 5.5s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i, 0) * -830ms);
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0.02);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes sway {
+  from {
+    transform: rotate(-1.4deg);
+  }
+  to {
+    transform: rotate(1.4deg);
+  }
+}
+
+.caption {
+  margin: 0.6rem 0 0;
+  min-height: 1.6em;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--soft);
+}
+
+.caption.on {
+  color: var(--ink);
+}
+
+/* ---------- 笔记列表 ---------- */
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+}
+
+.entries li {
+  border-bottom: 1px solid var(--line);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  gap: 0.2rem 1.25rem;
+  align-items: baseline;
+  padding: 0.9rem 0;
+  text-decoration: none;
+}
+
+.entry time,
+.entry-meta {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+.entry-main {
+  font-size: 0.88rem;
+  color: var(--soft);
+}
+
+.entry-main strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+a.entry:hover strong,
+.entry.lit strong {
+  color: var(--bloom);
+}
+
+@media (max-width: 600px) {
+  .entry {
+    grid-template-columns: 1fr auto;
+  }
+  .entry-main {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* ---------- 正文、联系 ---------- */
+.prose {
+  max-width: 36rem;
+}
+
+.prose p {
+  margin: 0 0 1rem;
+}
+
+.links {
+  margin: 0;
+  border-top: 1px solid var(--ink);
+}
+
+.links div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.links dt {
+  color: var(--soft);
+  font-size: 0.88rem;
+}
+
+.links dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.links a {
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--bloom);
+}
+
+footer {
+  margin-top: clamp(4rem, 12vh, 6rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.74rem;
+  color: var(--faint);
+}
+
+/* ---------- 单篇笔记 ---------- */
+.note-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.note-head h1 {
+  font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+  margin-bottom: 0.7rem;
+}
+
+.note-meta {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--soft);
+}
+
+.note-plant {
+  flex: none;
+  width: 5rem;
+  overflow: visible;
+}
+
+.body {
+  margin-top: 2rem;
+}
+
+.body h2 {
+  margin: 2.2rem 0 0.6rem;
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.body ul,
+.body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.body a {
+  color: var(--bloom);
+  text-underline-offset: 3px;
+}
+
+.body code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  padding: 0.1em 0.3em;
+  background: var(--line);
+}
+
+.body pre {
+  overflow-x: auto;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.body pre code {
+  padding: 0;
+  background: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grow,
+  .sway {
+    animation: none;
+  }
+}
