@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chen Yuxiang</title>
+  <meta name="description" content="Chen Yuxiang writes essays you can play: you make a choice first, see what happens, and then read why.">
+  <meta property="og:title" content="Chen Yuxiang">
+  <meta property="og:description" content="Chen Yuxiang writes essays you can play: you make a choice first, see what happens, and then read why.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <nav class="top">
+    <a href="/">yuxiangchen.dev</a>
+    <a href="/zh/" lang="zh-CN">中文</a>
+  </nav>
+
+  <header>
+    <h1>Chen Yuxiang</h1>
+    <p class="lede">I write essays you can play. You make a choice first, see what happens, and then read why.</p>
+  </header>
+
+  <!-- 首页的小游戏。结果里的几句话写在下面的 data-* 里，{n} {p} {q} 会被换成数字。 -->
+  <div class="play" data-play
+    data-heads="H" data-tails="T"
+    data-under="less than 1%"
+    data-jumpy="Side changes: {n} of 19. A real coin changes that often {p} of the time."
+    data-streaky="Side changes: {n} of 19. A real coin changes that rarely {p} of the time."
+    data-passes="Side changes: {n} of 19. That is within what a real coin does."
+    data-why="Most people change sides too often, because a streak feels like a mistake. It is not: in twenty flips a real coin produces a streak of four or more {p} of the time, and five or more {q} of the time. The longest streak in each row is marked.">
+    <p>None are published yet, so here is the idea in twenty clicks. <strong>Pretend you are a coin.</strong> Give me twenty flips, as random as you can make them.</p>
+
+    <div class="keys" data-keys>
+      <button type="button" data-face="0" aria-label="Heads">H</button>
+      <button type="button" data-face="1" aria-label="Tails">T</button>
+      <span class="count" data-count>0 / 20</span>
+    </div>
+
+    <p class="row-label">Your flips</p>
+    <p class="seq" data-mine aria-live="polite"></p>
+
+    <div class="result" data-result hidden>
+      <p class="row-label">A real coin, flipped just now</p>
+      <p class="seq" data-coin></p>
+
+      <table>
+        <thead><tr><th></th><th>You</th><th>Real coin</th></tr></thead>
+        <tbody>
+          <tr><td>Times it changed sides (out of 19)</td><td data-my-switches></td><td data-coin-switches></td></tr>
+          <tr><td>Longest streak</td><td data-my-run></td><td data-coin-run></td></tr>
+        </tbody>
+      </table>
+
+      <p class="verdict" data-verdict></p>
+      <p data-why></p>
+      <button class="again" type="button" data-again>Flip again</button>
+    </div>
+
+    <noscript><p class="quiet">This part needs JavaScript.</p></noscript>
+  </div>
+  <p class="quiet">Or press H and T on the keyboard.</p>
+
+  <section>
+    <h2>Essays</h2>
+    <p class="quiet">None yet. The first one is being written.</p>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p>I am a graduate student in business, and I build software. The ideas I find most useful, in game theory, markets and pricing, are easy to state and hard to believe until you have been caught by them yourself.</p>
+    <p>So each essay here will be short, about one idea, and built around a small game that lets you get it wrong first.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <dl class="links">
+      <div><dt>Email</dt><dd><a href="mailto:chen@yuxiangchen.dev">chen@yuxiangchen.dev</a></dd></div>
+      <div><dt>GitHub</dt><dd><a href="https://github.com/gitcyx93">gitcyx93</a></dd></div>
+    </dl>
+    <p class="quiet" style="margin-top:.8rem">No sign-up, no follow. Just write.</p>
+  </section>
+
+  <footer>© 2026 Chen Yuxiang</footer>
+</main>
+<script src="/play.js" defer></script>
+</body>
+</html>

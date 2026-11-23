@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chen Yuxiang</title>
+  <meta name="description" content="陈宇翔写可以玩的文章：你先做一个选择，看看会发生什么，再读为什么。">
+  <meta property="og:title" content="Chen Yuxiang">
+  <meta property="og:description" content="陈宇翔写可以玩的文章：你先做一个选择，看看会发生什么，再读为什么。">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <nav class="top">
+    <a href="/zh/">yuxiangchen.dev</a>
+    <a href="/" lang="en">EN</a>
+  </nav>
+
+  <header>
+    <h1>Chen Yuxiang</h1>
+    <p class="lede">我写可以玩的文章。你先做一个选择，看看会发生什么，再读为什么。</p>
+  </header>
+
+  <!-- 首页的小游戏。结果里的几句话写在下面的 data-* 里，{n} {p} {q} 会被换成数字。 -->
+  <div class="play" data-play
+    data-heads="正" data-tails="反"
+    data-under="不到 1%"
+    data-jumpy="你换了 {n} 次面。真硬币只有 {p} 的时候会换得这么勤。"
+    data-streaky="你只换了 {n} 次面。真硬币只有 {p} 的时候会换得这么少。"
+    data-passes="你换了 {n} 次面，在真硬币的正常范围内。"
+    data-why="大多数人换面换得太勤，因为连着出现同一面看起来像出了错。其实不是：抛二十次，真硬币有 {p} 的时候会连出四次或更多，有 {q} 的时候会连出五次或更多。两行里最长的那一串都标出来了。">
+    <p>现在还没有发表的文章，所以先用二十次点击说明这是什么意思。<strong>假装你是一枚硬币。</strong>给我二十次正反面，越随机越好。</p>
+
+    <div class="keys" data-keys>
+      <button type="button" data-face="0" aria-label="正面">正</button>
+      <button type="button" data-face="1" aria-label="反面">反</button>
+      <span class="count" data-count>0 / 20</span>
+    </div>
+
+    <p class="row-label">你的二十次</p>
+    <p class="seq" data-mine aria-live="polite"></p>
+
+    <div class="result" data-result hidden>
+      <p class="row-label">一枚真硬币，刚刚抛的</p>
+      <p class="seq" data-coin></p>
+
+      <table>
+        <thead><tr><th></th><th>你</th><th>真硬币</th></tr></thead>
+        <tbody>
+          <tr><td>换面的次数（最多 19 次）</td><td data-my-switches></td><td data-coin-switches></td></tr>
+          <tr><td>最长连续</td><td data-my-run></td><td data-coin-run></td></tr>
+        </tbody>
+      </table>
+
+      <p class="verdict" data-verdict></p>
+      <p data-why></p>
+      <button class="again" type="button" data-again>再来一次</button>
+    </div>
+
+    <noscript><p class="quiet">This part needs JavaScript.</p></noscript>
+  </div>
+  <p class="quiet">也可以按键盘上的 H 和 T。</p>
+
+  <section>
+    <h2>文章</h2>
+    <p class="quiet">还没有。第一篇正在写。</p>
+  </section>
+
+  <section>
+    <h2>关于我</h2>
+    <p>我是商科研究生，也做软件。博弈论、市场、定价里那些最有用的想法，说出来都很简单，但在自己上过一次当之前很难真的相信。</p>
+    <p>所以这里的每篇文章都会很短，只讲一件事，并且围绕一个小游戏展开，让你先错一次。</p>
+  </section>
+
+  <section>
+    <h2>联系</h2>
+    <dl class="links">
+      <div><dt>Email</dt><dd><a href="mailto:chen@yuxiangchen.dev">chen@yuxiangchen.dev</a></dd></div>
+      <div><dt>GitHub</dt><dd><a href="https://github.com/gitcyx93">gitcyx93</a></dd></div>
+    </dl>
+    <p class="quiet" style="margin-top:.8rem">不用注册，不用关注，直接写信就行。</p>
+  </section>
+
+  <footer>© 2026 Chen Yuxiang</footer>
+</main>
+<script src="/play.js" defer></script>
+</body>
+</html>
